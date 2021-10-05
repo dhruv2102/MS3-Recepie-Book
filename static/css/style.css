@@ -8,3 +8,9 @@ body {
 main {
     flex: 1 0 auto;
   }
+
+.vertical-line {
+    border-left: 2px solid black;
+    height: 300px;
+    padding-left: 15px;
+}

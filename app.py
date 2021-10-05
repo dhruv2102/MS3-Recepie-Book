@@ -18,11 +18,17 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-@app.route("/get_recepies")
-def get_recepies():
-    recepies = mongo.db.recepies.find()
-    return render_template('recepies.html', recepies=recepies)
+@app.route("/home")
+def home():
+    return render_template('home.html')
+
+
+# @app.route("/get_recepies")
+# def get_recepies():
+#     recepies = mongo.db.recepies.find()
+#     return render_template('recepies.html', recepies=recepies)
 
 
 if __name__ == "__main__":
-    app.run(host=os.environ.get("IP"), port=int(os.environ.get("PORT")), debug=True)
+    app.run(host=os.environ.get("IP"), port=int(os.environ.get("PORT")), 
+            debug=True)
