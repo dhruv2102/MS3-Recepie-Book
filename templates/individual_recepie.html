@@ -1,10 +1,61 @@
 {% extends 'base.html'%}
 {% block content %}
 
-   <!-- Receipe Name Title -->
-   <div class="row">
-       <h3 class="center-align">{{ recepie.recepie_name }}</h3>
-   </div>
+    <!-- Receipe Name Title -->
+    <div class="row">
+        <h3 class="center-align">{{ recepie.recepie_name }}</h3>
+    </div>
 
+
+    <div class="container">
+        <!-- Information and Image -->
+        <div class="row">
+            <div class="col s4">
+                <h6>Prepartion Time: {{ recepie.prep_time }}</h6>
+                <h6>Serving Size: {{ recepie.Servings }}</h6>
+                <h6>Category: {{ recepie.category_name }}</h6>
+                <h6>Created By: {{ recepie.created_by }}</h6>
+            </div>
+
+            <div class="col s8">
+                <img class="responsive-img" src="{{ recepie.image_url}}" alt="recepie iamge">
+            </div>
+
+        </div>
+        
+        <!-- Instruction and Ingredients -->
+        <div class="row">
+            <div class="col s4">
+                <h4>Ingredients</h4>
+
+                <ul>
+                    {% for item in recepie.ingredients.splitlines() %}
+                        <li>
+                            <p>
+                                {{item}}
+                            </p>
+                        </li>
+                    {% endfor%}
+                </ul>
+            </div>
+
+            <div class="col s8">
+                <h4>Method</h4>
+
+                <ol>
+                    {% for item in recepie.steps.splitlines() %}
+                        <li>
+                            <p>
+                                {{item}}
+                            </p>
+                        </li>
+                    {% endfor%}
+                </ol>
+            </div>
+
+        </div>
+
+
+    </div>
 
 {% endblock %}
