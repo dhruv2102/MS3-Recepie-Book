@@ -30,7 +30,7 @@ def sign_up():
 
 @app.route("/get_recepies")
 def get_recepies():
-    recepies = mongo.db.recepies.find()
+    recepies = list(mongo.db.recepies.find())
     return render_template('recepies.html', recepies=recepies)
 
 

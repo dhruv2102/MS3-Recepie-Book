@@ -7,11 +7,11 @@
             <div class="col s12">
                 <h3 class="center-align">Recepies</h3>
                 <div class="row">
-                    {% for item in range(10)%}
+                    {% for item in recepies%}
                         <div class="col s12 display-recipes">
                             <a href="#">
-                                <img class="recipe_img center-align" src="#" alt="recipe_mobile">
-                                <span class="card-title recipes-title">{{item}}</span>
+                                <img class="recipe_img center-align" src="{{ item.image_url }}" alt="recipe_mobile">
+                                <span class="card-title recipes-title">{{ item.recepie_name }}</span>
                             </a>
                         </div>
                     {% endfor %}
@@ -24,11 +24,11 @@
             <div class="col s12">
                 <h3 class="center-align">Recepies</h3>
                 <div class="row">
-                    {% for item in range(10)%}
+                    {% for item in recepies%}
                         <div class="col s4 display-recipes">
                             <a href="#">
-                                <img class="recipe_img" src="#" alt="recipe_mobile">
-                                <span class="card-title recipes-title">{{item}}</span>
+                                <img class="recipe_img center-align" src="{{ item.image_url }}" alt="recipe_mobile">
+                                <span class="card-title recipes-title">{{ item.recepie_name }}</span>
                             </a>
                         </div>
                     {% endfor %}
