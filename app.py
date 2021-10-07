@@ -34,8 +34,17 @@ def get_recepies():
     return render_template('recepies.html', recepies=recepies)
 
 
+@app.route("/get_individual_recepie/<recepie_id>")
+def get_individual_recepie(recepie_id):
+    recepie = mongo.db.recepies.find_one(
+        {
+            "_id": ObjectId(recepie_id)
+        }
+    )
+
+    return render_template("individual_recepie.html", recepie=recepie)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"), port=int(os.environ.get("PORT")), 
             debug=True)
-
-
