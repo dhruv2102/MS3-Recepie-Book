@@ -23,12 +23,19 @@ def home():
     return render_template('home.html')
 
 
-# @app.route("/get_recepies")
-# def get_recepies():
-#     recepies = mongo.db.recepies.find()
-#     return render_template('recepies.html', recepies=recepies)
+@app.route('/sign_up')
+def sign_up():
+    return render_template('sign_up.html')
+
+
+@app.route("/get_recepies")
+def get_recepies():
+    recepies = mongo.db.recepies.find()
+    return render_template('recepies.html', recepies=recepies)
 
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"), port=int(os.environ.get("PORT")), 
             debug=True)
+
+
