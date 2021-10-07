@@ -2,8 +2,25 @@
 {% block content %}
 
     <div class="container">
+        <!-- Mobile Recepie -->
+        <div class="row show-on-small hide-on-med-and-up">
+            <div class="col s12">
+                <h3 class="center-align">Recepies</h3>
+                <div class="row">
+                    {% for item in range(10)%}
+                        <div class="col s12 display-recipes">
+                            <a href="#">
+                                <img class="recipe_img center-align" src="#" alt="recipe_mobile">
+                                <span class="card-title recipes-title">{{item}}</span>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
         <!-- Desktop Recepie -->
-        <div class="row">
+        <div class="row hide-on-small-only">
             <div class="col s12">
                 <h3 class="center-align">Recepies</h3>
                 <div class="row">
