@@ -5,7 +5,7 @@
 {% block content %}
 
     <!-- Welcome -->
-    <div class="row">
+    <div class="row center-align">
         <div class="col s12 m8 offset-m2">
             <h3>
                 Welcome, {{ users_name}}!!
@@ -13,6 +13,32 @@
         </div>    
     </div>
 
+
+    <!-- Add ing recepies of the user -->
+    <div class="row">
+        <div class="col s5 m4 offset-m2">
+            <h5>My Recipes</h5>
+        </div>
+
+        <div class="col s7 m4 right">
+            <h5>Add New Recipes +</h5>
+        </div>
+    </div>
+
+    <!-- All the recepies  -->
+    <div class="col s12 m8 offset-m2">
+        <ul>
+            {% for item in recepie_list %}
+                <li>
+                    <div class="col s5">
+                        <h5>{{ item.recepie_name }}</h5>
+                    </div>
+
+                    <!-- Add edit and delete functionality here -->
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
 
 {% endblock %}

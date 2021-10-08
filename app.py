@@ -58,20 +58,22 @@ def login():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()}
         )
-  
+
         if existing_user:
             entered_password = request.form.get("password")
             user_password = existing_user["password"]
             users_name = existing_user['name']
-            
+            username = existing_user['username']
+
             if check_password_hash(user_password, entered_password):
                 session["user"] = existing_user['username']
                 flash("Welcome {}".format(users_name))
                 # Redirect to profile
-                return redirect(url_for('get_recepies'))
+                return redirect(url_for('profile', username=username))           
             else:
                 flash("Your username/password was wrong")
-                return redirect(url_for('profile', users_name=users_name))
+                return redirect(url_for('login'))
+
         else:
             flash("User doesn't exist, please sign up")
             return redirect(url_for('sign_up'))
@@ -111,7 +113,12 @@ def profile(username):
     )
 
     users_name = existing_user['name']
-    return render_template('profile.html', users_name=users_name)
+    recepies = list(
+        mongo.db.recepies.find(
+            {"created_by": username}
+        )
+    )
+    return render_template('profile.html', users_name=users_name, recepie_list=recepies)
 
 
 if __name__ == "__main__":
