@@ -16,6 +16,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -46,8 +47,36 @@ def sign_up():
         session['user'] = request.form.get("username").lower()
         flash('You are sucessfully signed up!!!')
 
-        # Redirect to Profile Page------------------------------------------ Need to do
+        # Redirect to Profile Page------------------------------------------ 
+        # Need to do
     return render_template('sign_up.html')
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()}
+        )
+    
+        if existing_user:
+            entered_password = request.form.get("password")
+            user_password = existing_user["password"]
+            users_name = existing_user['name']
+
+            if check_password_hash(entered_password, user_password):
+                session["user"] = existing_user['username']
+                flash("Welcome {}".format(users_name))
+                # Redirect to profile
+                return redirect(url_for('get_recepies'))
+            else:
+                flash("Your username/password was wrong")
+                return redirect(url_for('login'))
+        else:
+            flash("User doesn't exist, please sign up")
+            return redirect(url_for('sign_up'))
+    
+    return render_template('login.html')
 
 
 @app.route("/get_recepies")
