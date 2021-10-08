@@ -27,7 +27,7 @@
                     <!-- Add session user stuff here -->
                     {% if session.user %}
                         <!-- Add user profile -->
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                         <li><a href="#">Add a Recepie</a></li>
 
                         {% if session.user|lower == "admin" %}
@@ -51,7 +51,7 @@
             <!-- Add session user stuff here -->
             {% if session.user %}
             <!-- Add user profile -->
-                <li><a href="#">Profile</a></li>
+                <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                 <li><a href="#">Add a Recepie</a></li>
 
                 {% if session.user|lower == "admin" %}

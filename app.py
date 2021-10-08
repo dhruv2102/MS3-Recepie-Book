@@ -58,13 +58,11 @@ def login():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()}
         )
-        print(existing_user)
-
+  
         if existing_user:
             entered_password = request.form.get("password")
             user_password = existing_user["password"]
             users_name = existing_user['name']
-            
             
             if check_password_hash(user_password, entered_password):
                 session["user"] = existing_user['username']
@@ -73,7 +71,7 @@ def login():
                 return redirect(url_for('get_recepies'))
             else:
                 flash("Your username/password was wrong")
-                return redirect(url_for('login'))
+                return redirect(url_for('profile', users_name=users_name))
         else:
             flash("User doesn't exist, please sign up")
             return redirect(url_for('sign_up'))
@@ -101,7 +99,19 @@ def get_individual_recepie(recepie_id):
 def logout():
     # Remove user from sesion cookie
     session.pop('user')
-    return redirect(url_for('home')) 
+    return redirect(url_for('home'))
+
+
+@app.route('/profile/<username>')
+def profile(username):
+    existing_user = mongo.db.users.find_one(
+        {
+            "username": username
+        }
+    )
+
+    users_name = existing_user['name']
+    return render_template('profile.html', users_name=users_name)
 
 
 if __name__ == "__main__":
