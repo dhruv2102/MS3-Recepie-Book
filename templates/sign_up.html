@@ -1,7 +1,51 @@
 {% extends 'base.html'%}
 
 {% block content %}
-    <p>Sign Up Form Goes Here</p>
+    <div class="row">
+        <h3 class='center-align'>SIGNUP</h3>
+    </div>
+
+    <div class="row">
+        <form action="POST" class="col s12 m8 offset-m2" action="url_for('sign_up')">
+
+            <!-- Username -->
+            <div class="row">
+                <div class="input-field col s10">
+                    <input id="name" name="name" type="text" class="validate" required>
+                    <label for="name">Name</label>
+                    <span class="helper-text" data-success="right">Your Name</span>
+                </div>
+            </div>
+
+            <!-- Username -->
+            <div class="row">
+                <div class="input-field col s10">
+                    <input id="username" name="username" type="text" minlength="5" maxlength="20" pattern="^[A-Za-z0-9_]{5,20}$" class="validate" required>
+                    <label for="username">Username</label>
+                    <span class="helper-text" data-error="5-20 characters, only letters and numbers" data-success="right">5-20 characters, only letters and numbers</span>
+                </div>
+            </div>
+
+            <!--Password -->
+            <div class="row">
+                <div class="input-field col s10">
+                    <input id="password" name="password" type="password" minlength="5" maxlength="20" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}$" class="validate" required>
+                    <label for="password">Password</label>
+                    <span class="helper-text" data-error="Must contain at least one number, and one uppercase and lowercase letter, and between 5-20 characters" data-success="right">
+                        Must contain at least one number, and one uppercase and lowercase letter, and between 5-20 characters
+                    </span>
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="row">
+                <div class="col s12">
+                    <button type="submit" class="col s4">Signup</button>
+                </div>     
+            </div>
+        </form>
+    </div>
+    
 
 
 {% endblock %}

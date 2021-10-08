@@ -23,8 +23,16 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/sign_up')
+@app.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():
+    if request.method == 'POST':
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()}
+        )
+
+        if existing_user:
+            flash("Username already exists, try again")
+            return redirect('sign_up')
     return render_template('sign_up.html')
 
 
@@ -41,7 +49,6 @@ def get_individual_recepie(recepie_id):
             "_id": ObjectId(recepie_id)
         }
     )
-
     return render_template("individual_recepie.html", recepie=recepie)
 
 
