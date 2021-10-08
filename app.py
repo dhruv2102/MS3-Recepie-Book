@@ -58,13 +58,15 @@ def login():
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()}
         )
-    
+        print(existing_user)
+
         if existing_user:
             entered_password = request.form.get("password")
             user_password = existing_user["password"]
             users_name = existing_user['name']
-
-            if check_password_hash(entered_password, user_password):
+            
+            
+            if check_password_hash(user_password, entered_password):
                 session["user"] = existing_user['username']
                 flash("Welcome {}".format(users_name))
                 # Redirect to profile
@@ -82,7 +84,7 @@ def login():
 @app.route("/get_recepies")
 def get_recepies():
     recepies = list(mongo.db.recepies.find())
-    return render_template('recepies.html', recepies=recepies)
+    return render_template("recepies.html", recepies=recepies)
 
 
 @app.route("/get_individual_recepie/<recepie_id>")

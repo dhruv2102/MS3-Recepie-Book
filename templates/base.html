@@ -37,7 +37,7 @@
                         {% endif %}
                         <li><a href="{{  url_for('logout') }}">Logout</a></li>
                     {% else %}
-                        <li><a href="#">Log In</a></li>
+                        <li><a href="{{ url_for('login') }}">Log In</a></li>
                     {% endif%}
 
                 </ul>
@@ -62,11 +62,25 @@
                 <!-- Add logout -->
                 <li><a href="{{  url_for('logout') }}">Logout</a></li>
             {% else %}
-                <li><a href="#">Log In</a></li>
+                <li><a href="{{ url_for('login') }}">Log In</a></li>
             {% endif%}
             
         </ul>
     </header>
+
+    <!-- Get flashed messages -->
+    <section>
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="row flashes">
+                        <h4 class="center align">{{ message }}</h4>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith%}
+    </section>
 
 
     <!-- Added main class to debug sticky footer - https://materializecss.com/footer.html -->

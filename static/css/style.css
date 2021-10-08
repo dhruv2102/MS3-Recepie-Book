@@ -35,3 +35,9 @@ main {
   color: #000;
   font-size: 17px;
 }
+
+
+.flashes h4 {
+  color: #000;
+  line-height: 2;
+}
