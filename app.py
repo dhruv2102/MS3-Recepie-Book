@@ -126,7 +126,7 @@ def add_recepie():
         }
         mongo.db.recepies.insert_one(recepie)
         flash("Recipe added")
-        return redirect(url_for('profile'))
+        return redirect(url_for('profile', username=session['user']))
 
     categories = list(mongo.db.categories.find())
     return render_template('add_recepie.html', categories=categories)
@@ -148,11 +148,18 @@ def edit_recepie(recepie_id):
         }
         mongo.db.recepies.update({"_id": ObjectId(recepie_id)}, edited_recepie)
         flash("Recipe added")
-        return redirect(url_for('profile'))
+        return redirect(url_for('profile', username=session['user']))
 
     recepie = mongo.db.recepies.find_one({"_id": ObjectId(recepie_id)})
     categories = list(mongo.db.categories.find())
     return render_template('edit_recepie.html', categories=categories, recepie=recepie)
+
+
+@app.route("/delete_recepie/<recepie_id>")
+def delete_recepie():
+    mongo.db.recepies.remove({"_id": ObjectId(recepie_id)})
+    flash("Recipe successfully deleted")
+    return redirect(url_for('profile', username=session['user']))
 
 
 if __name__ == "__main__":
