@@ -125,9 +125,34 @@ def add_recepie():
             "created_by": session['user'],
         }
         mongo.db.recepies.insert_one(recepie)
-    
+        flash("Recipe added")
+        return redirect(url_for('profile'))
+
     categories = list(mongo.db.categories.find())
     return render_template('add_recepie.html', categories=categories)
+
+
+@app.route("/edit_recepie/<recepie_id>", methods=['GET', 'POST'])
+def edit_recepie(recepie_id):
+    if request.method == 'POST':
+        edited_recepie = {
+            "recepie_name": request.form.get("recepie_name"),
+            "category_name": request.form.get("recepie_name"),
+            "ingredients": request.form.get("ingredients"),
+            "image_url": request.form.get("image_url"),
+            "Servings": request.form.get("serves"),
+            "prep_time": request.form.get("prep_time"),
+            "steps": request.form.get("instructions"),
+            "Tips": request.form.get("tips"),
+            "created_by": session['user'],
+        }
+        mongo.db.recepies.update({"_id": ObjectId(recepie_id)}, edited_recepie)
+        flash("Recipe added")
+        return redirect(url_for('profile'))
+
+    recepie = mongo.db.find_one({"_id": ObjectId(recepie_id)})
+    categories = list(mongo.db.categories.find())
+    return render_template('edit_rece[ie].html', categories=categories, recepie=recepie)
 
 
 if __name__ == "__main__":
