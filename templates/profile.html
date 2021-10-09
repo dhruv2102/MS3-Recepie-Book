@@ -36,7 +36,12 @@
                                 <h5>{{ item.recepie_name }}</h5>
                             </div>
                             <div class="col s6 right-align">
-                                <span>Edit</span>
+                                <span>
+                                    <a href="{{ url_for('edit_recepie', recepie_id=item._id) }}">
+                                        Edit
+                                    </a>
+                                    
+                                </span>
                                 <span>Delete</span>
 
                             </div>

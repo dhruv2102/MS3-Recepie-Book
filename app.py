@@ -150,9 +150,9 @@ def edit_recepie(recepie_id):
         flash("Recipe added")
         return redirect(url_for('profile'))
 
-    recepie = mongo.db.find_one({"_id": ObjectId(recepie_id)})
+    recepie = mongo.db.recepies.find_one({"_id": ObjectId(recepie_id)})
     categories = list(mongo.db.categories.find())
-    return render_template('edit_rece[ie].html', categories=categories, recepie=recepie)
+    return render_template('edit_recepie.html', categories=categories, recepie=recepie)
 
 
 if __name__ == "__main__":
