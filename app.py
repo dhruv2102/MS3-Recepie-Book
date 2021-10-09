@@ -1,5 +1,6 @@
 import os
-from flask import Flask, flash, render_template, redirect, request, session, url_for
+from flask import (Flask, flash, render_template, redirect, 
+                    request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -109,5 +110,27 @@ def profile(username):
     return render_template("profile.html", users_name=users_name, recepie_list=recepies)
 
 
+@app.route("/add_recepie", methods=['GET', 'POST'])
+def add_recepie():
+    if request.method == 'POST':
+        recepie = {
+            "recepie_name": request.form.get("recepie_name"),
+            "category_name": request.form.get("recepie_name"),
+            "ingredients": request.form.get("ingredients"),
+            "image_url": request.form.get("image_url"),
+            "Servings": request.form.get("serves"),
+            "prep_time": request.form.get("prep_time"),
+            "steps": request.form.get("instructions"),
+            "Tips": request.form.get("tips"),
+            "created_by": session['user'],
+        }
+        mongo.db.recepies.insert_one(recepie)
+    
+    categories = list(mongo.db.categories.find())
+    return render_template('add_recepie.html', categories=categories)
+
+
 if __name__ == "__main__":
-    app.run(host=os.environ.get("IP"), port=int(os.environ.get("PORT")), debug=True)
+    app.run(
+        host=os.environ.get("IP"), port=int(os.environ.get("PORT")), debug=True
+    )
