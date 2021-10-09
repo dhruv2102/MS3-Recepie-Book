@@ -1,43 +1,32 @@
 {% extends 'base.html'%}
-
-
-
 {% block content %}
 
-    <!-- Welcome -->
-    <div class="row center-align">
-        <div class="col s12 m8 offset-m2">
-            <h3>
-                Welcome, {{ users_name}}!!
-            </h3>
-        </div>    
+    <div class="row">
+        <h3 class='center-align'>Categories</h3>
     </div>
 
-
-    <!-- Add ing recepies of the user -->
     <div class="row">
         <div class="col s5 m4 offset-m2">
-            <h5>My Recipes</h5>
+            <h5>All Categories</h5>
         </div>
 
         <div class="col s7 m4 right">
-            <h5>Add New Recipes +</h5>
+            <h5>Add New Category +</h5>
         </div>
     </div>
 
-    <!-- All the recepies  -->
     <div class="row">
         <div class="col s12 m8 offset-m2">
             <ul>
-                {% for item in recepie_list %}
+                {% for item in categories %}
                     <li>
                         <div class="row">
                             <div class="col s5">
-                                <h5>{{ item.recepie_name }}</h5>
+                                <h5>{{ item.category_name }}</h5>
                             </div>
                             <div class="col s6 right-align">
                                 <span>
-                                    <a href="{{ url_for('edit_recepie', recepie_id=item._id) }}">
+                                    <a href="#">
                                         Edit
                                     </a>
                                     
@@ -48,11 +37,11 @@
                                     <!-- Modal Structure -->
                                     <div id="{{ loop.index }}" class="modal left-align">
                                         <div class="modal-content">
-                                            <h4>Are you sure you want to delete {{ item.recepie_name }} ?</h4>
+                                            <h4>Are you sure you want to delete {{ item.category_name }}?</h4>
                                         </div>
                                         <div class="modal-footer">
                                             <a href="#" class='modal-close btn-flat'>Cancel</a>
-                                            <a href="{{ url_for('delete_recepie', recepie_id=item._id) }}" class="modal-close waves-effect waves-green btn-flat">Delete</a>
+                                            <a href="#" class="modal-close waves-effect waves-green btn-flat">Delete</a>
                                         </div>
                                     </div>
                                 
@@ -68,6 +57,5 @@
         </div>
     </div>
     
-
 
 {% endblock %}
