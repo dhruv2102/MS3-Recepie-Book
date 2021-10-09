@@ -26,19 +26,29 @@
     </div>
 
     <!-- All the recepies  -->
-    <div class="col s12 m8 offset-m2">
-        <ul>
-            {% for item in recepie_list %}
-                <li>
-                    <div class="col s5">
-                        <h5>{{ item.recepie_name }}</h5>
-                    </div>
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <ul>
+                {% for item in recepie_list %}
+                    <li>
+                        <div class="row">
+                            <div class="col s5">
+                                <h5>{{ item.recepie_name }}</h5>
+                            </div>
+                            <div class="col s6 right-align">
+                                <span>Edit</span>
+                                <span>Delete</span>
 
-                    <!-- Add edit and delete functionality here -->
-                </li>
-            {% endfor %}
-        </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Add edit and delete functionality here -->
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
+    
 
 
 {% endblock %}
