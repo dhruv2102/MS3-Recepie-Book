@@ -104,7 +104,6 @@ def logout():
 @app.route("/profile/<username>")
 def profile(username):
     existing_user = mongo.db.users.find_one({"username": username})
-
     users_name = existing_user["name"]
     recepies = list(mongo.db.recepies.find({"created_by": username}))
     return render_template("profile.html", users_name=users_name, recepie_list=recepies)
@@ -156,7 +155,7 @@ def edit_recepie(recepie_id):
 
 
 @app.route("/delete_recepie/<recepie_id>")
-def delete_recepie():
+def delete_recepie(recepie_id):
     mongo.db.recepies.remove({"_id": ObjectId(recepie_id)})
     flash("Recipe successfully deleted")
     return redirect(url_for('profile', username=session['user']))
