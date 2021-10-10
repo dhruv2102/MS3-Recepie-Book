@@ -18,7 +18,7 @@
             </div>
 
             <div class="col s8">
-                <img class="responsive-img" src="{{ recepie.image_url}}" alt="recepie iamge">
+                <img class="responsive-img" src="{{ recepie.image_url}}" alt="recepie image">
             </div>
 
         </div>
@@ -64,8 +64,13 @@
                 {% for comment in recepie.comments %}
                     <ul>
                         <li>
-                            <p>{{comment}}</p>
+                            <p>
+                                {{comment}}
+                                <a href="{{ url_for('delete_comment', recepie_id=recepie._id, loop_index=loop.index)}}" class="right">Delete</a>
+                            </p>
+                            
                         </li>
+                        
                     </ul>
 
                 {% endfor %}

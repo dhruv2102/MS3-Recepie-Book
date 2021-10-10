@@ -224,6 +224,20 @@ def search_bar():
     return render_template("recepies.html", recepies=recepies)
 
 
+@app.route('/delete_comment/<recepie_id>/<loop_index>')
+def delete_comment(recepie_id, loop_index):
+    recepie = mongo.db.recepies.find_one({
+        "_id": ObjectId(recepie_id)
+    })
+    comments = recepie['comments']
+    print(recepie)
+    comments.pop(int(loop_index)-1)
+    recepie['comments'] = comments
+    print(recepie)
+    mongo.db.recepies.update({"_id": ObjectId(recepie_id)}, recepie)
+    return redirect(url_for('get_individual_recepie', recepie_id=recepie_id))
+
+
 if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP"), port=int(os.environ.get("PORT")), debug=True
