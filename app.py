@@ -5,6 +5,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 if os.path.exists("env.py"):
     import env
 
@@ -199,6 +200,27 @@ def delete_category(category_id):
 
     # Remove the recepies with the given category
     return redirect(url_for('categories'))
+
+
+# https://docs.mongodb.com/manual/text-search/ - Searching for text
+# https://stackoverflow.com/questions/48371016/pymongo-how-to-use-full-text-search
+@app.route('/search_bar', methods=["GET", "POST"])
+def search_bar():
+    searched_text = request.form.get("search_bar")
+    # https://stackoverflow.com/questions/48371016/pymongo-how-to-use-full-text-search
+    mongo.db.recepies.drop_indexes()
+    mongo.db.recepies.create_index([("$**", 'text')])
+
+    cursor = (mongo.db.recepies.find(
+        {"$text": {"$search": searched_text}})
+        )
+
+    recepies = []
+
+    for i in cursor:
+        recepies.append(i)
+
+    return render_template("recepies.html", recepies=recepies)
 
 
 if __name__ == "__main__":
