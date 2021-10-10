@@ -1,19 +1,38 @@
 {% extends 'base.html'%}
 {% block content %}
 
+    <div class="row">
+        <h3 class="center-align">Recipes</h3>
+    </div>
+
     <div class="container">
+        <!-- Search Bar goes here -->
+        <div class="row">
+            <div class="col s10">
+                <nav>
+                    <div class="nav-wrapper">
+                        <form action="#" method="post">
+                            <div class="input-field">
+                                <input id="search" type="search" required>
+                                <label class="label-icon" for="search">Search</label>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
         <!-- Mobile Recepie -->
         <div class="row show-on-small hide-on-med-and-up">
             <div class="col s12">
-                <h3 class="center-align">Recepies</h3>
                 <div class="row">
                     {% for item in recepies%}
-                        <div class="col s12 display-recipes">
-                            <a href="{{ url_for('get_individual_recepie', recepie_id=item._id)}}">
-                                <img class="recipe_img center-align" src="{{ item.image_url }}" alt="recepie_img">
-                                <span class="card-title recipes-title">{{ item.recepie_name }}</span>
-                            </a>
-                        </div>
+                    <div class="col s12 display-recipes">
+                        <a href="{{ url_for('get_individual_recepie', recepie_id=item._id)}}">
+                            <img class="recipe_img center-align" src="{{ item.image_url }}" alt="recepie_img">
+                            <span class="card-title recipes-title">{{ item.recepie_name }}</span>
+                        </a>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
@@ -22,15 +41,14 @@
         <!-- Desktop Recepie -->
         <div class="row hide-on-small-only">
             <div class="col s12">
-                <h3 class="center-align">Recepies</h3>
                 <div class="row">
                     {% for item in recepies%}
-                        <div class="col s4 display-recipes">
-                            <a href="{{ url_for('get_individual_recepie', recepie_id=item._id)}}">
-                                <img class="recipe_img center-align" src="{{ item.image_url }}" alt="recepie_img">
-                                <span class="card-title recipes-title">{{ item.recepie_name }}</span>
-                            </a>
-                        </div>
+                    <div class="col s4 display-recipes">
+                        <a href="{{ url_for('get_individual_recepie', recepie_id=item._id)}}">
+                            <img class="recipe_img center-align" src="{{ item.image_url }}" alt="recepie_img">
+                            <span class="card-title recipes-title">{{ item.recepie_name }}</span>
+                        </a>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
