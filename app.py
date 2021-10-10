@@ -123,6 +123,7 @@ def add_recepie():
             "steps": request.form.get("instructions"),
             "Tips": request.form.get("tips"),
             "created_by": session['user'],
+            "comments": []
         }
         mongo.db.recepies.insert_one(recepie)
         flash("Recipe added")
@@ -203,7 +204,6 @@ def delete_category(category_id):
 
 
 # https://docs.mongodb.com/manual/text-search/ - Searching for text
-# https://stackoverflow.com/questions/48371016/pymongo-how-to-use-full-text-search
 @app.route('/search_bar', methods=["GET", "POST"])
 def search_bar():
     searched_text = request.form.get("search_bar")
@@ -215,6 +215,7 @@ def search_bar():
         {"$text": {"$search": searched_text}})
         )
 
+    # https://code-institute-room.slack.com/files/UD62BF5GC/FJVAS8C0H/-.pl
     recepies = []
 
     for i in cursor:
