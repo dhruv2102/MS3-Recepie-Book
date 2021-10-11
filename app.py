@@ -230,12 +230,24 @@ def delete_comment(recepie_id, loop_index):
         "_id": ObjectId(recepie_id)
     })
     comments = recepie['comments']
-    print(recepie)
     comments.pop(int(loop_index)-1)
     recepie['comments'] = comments
-    print(recepie)
     mongo.db.recepies.update({"_id": ObjectId(recepie_id)}, recepie)
     return redirect(url_for('get_individual_recepie', recepie_id=recepie_id))
+
+
+@app.route('/add_comment/<recepie_id>', methods=["GET", "POST"])
+def add_comment(recepie_id):
+    if request.method == 'POST':
+        recepie = mongo.db.recepies.find_one({
+            "_id": ObjectId(recepie_id)
+        })
+        comments = recepie['comments']
+        comments.append(request.form.get('comment'))
+        recepie['comments'] = comments
+        mongo.db.recepies.update({"_id": ObjectId(recepie_id)}, recepie)
+    return redirect(url_for('get_individual_recepie', recepie_id=recepie_id))
+    
 
 
 if __name__ == "__main__":
