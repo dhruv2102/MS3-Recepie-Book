@@ -42,3 +42,8 @@ main {
   color: #000;
   line-height: 2;
 }
+
+
+.sidenav li>a{
+  color: mintcream;
+}
