@@ -104,10 +104,15 @@ def logout():
 
 @app.route("/profile/<username>")
 def profile(username):
-    existing_user = mongo.db.users.find_one({"username": username})
-    users_name = existing_user["name"]
-    recepies = list(mongo.db.recepies.find({"created_by": username}))
-    return render_template("profile.html", users_name=users_name, recepie_list=recepies)
+    # If session user is not same as logged in user then log then empty the session user string
+    if session['user'] == username:
+        existing_user = mongo.db.users.find_one({"username": username})
+        users_name = existing_user["name"]
+        recepies = list(mongo.db.recepies.find({"created_by": username}))
+        return render_template("profile.html", users_name=users_name, recepie_list=recepies)
+    flash('Wrong profile, please log in again')
+    session.pop('user')
+    return redirect(url_for("login"))
 
 
 @app.route("/add_recepie", methods=['GET', 'POST'])
