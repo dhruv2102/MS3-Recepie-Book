@@ -55,3 +55,8 @@ main {
   min-height: 500px;
   padding: 15px;
 }
+
+.underline{
+  width: 70%;
+  border: 1px solid;
+}
