@@ -128,7 +128,7 @@ def add_recepie():
             "steps": request.form.get("instructions"),
             "Tips": request.form.get("tips"),
             "created_by": session['user'],
-            "comments": []
+            "comments": [],
         }
         mongo.db.recepies.insert_one(recepie)
         flash("Recipe added")
@@ -253,7 +253,6 @@ def add_comment(recepie_id):
         mongo.db.recepies.update({"_id": ObjectId(recepie_id)}, recepie)
     return redirect(url_for('get_individual_recepie', recepie_id=recepie_id))
     
-
 
 if __name__ == "__main__":
     app.run(
