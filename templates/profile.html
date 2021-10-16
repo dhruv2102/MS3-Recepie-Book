@@ -9,10 +9,10 @@
         <div class="col s12 m8 offset-m2">
             <h3>
                 Welcome, {{ users_name}}!!
-            </h3>
+            </h3>  
+            <hr class="profile-underline blue-grey">
         </div>    
     </div>
-
 
     <!-- Add ing recepies of the user -->
     <div class="row">
@@ -20,10 +20,10 @@
             <h5>My Recipes</h5>
         </div>
 
-        <div class="col s7 m4 right">
+        <div class="col s7 m4 right-align">
             <h5>
                 <a href="{{ url_for('add_recepie') }}">
-                    Add New Recipes +
+                    Add a recipe
                 </a>    
             </h5>
         </div>
@@ -39,15 +39,14 @@
                             <div class="col s5">
                                 <h5>{{ item.recepie_name }}</h5>
                             </div>
-                            <div class="col s6 right-align">
-                                <span>
-                                    <a href="{{ url_for('edit_recepie', recepie_id=item._id) }}">
+                            <div class="col s7">
+                        
+                                    <a href="{{ url_for('edit_recepie', recepie_id=item._id) }}" class="btn center align right profile-button blue-grey darken-4">
                                         Edit
                                     </a>
-                                    
-                                </span>
-                                <span>
-                                    <a class="waves-effect waves-light btn modal-trigger" href="#{{ loop.index }}">Delete</a>
+                               
+                               
+                                    <a class="btn modal-trigger center align right profile-button blue-grey darken-4" href="#{{ loop.index }}">Delete</a>
 
                                     <!-- Modal Structure -->
                                     <div id="{{ loop.index }}" class="modal left-align">
@@ -60,7 +59,7 @@
                                         </div>
                                     </div>
                                 
-                                </span>
+                                
 
                             </div>
                         </div>

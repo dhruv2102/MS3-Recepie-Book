@@ -60,3 +60,13 @@ main {
   width: 70%;
   border: 1px solid;
 }
+
+.profile-underline{
+  border: 1px solid;
+  width: 100%;
+}
+
+.profile-button{
+  display: block;
+  margin: 10px;
+}
