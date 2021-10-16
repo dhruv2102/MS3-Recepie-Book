@@ -2,7 +2,8 @@
 {% block content %}
 
     <div class="row">
-        <h3 class="center-align">Recipes</h3>
+        <h3 class="center-align">RECIPES</h3>
+        <hr class='underline blue-grey'>
     </div>
 
     <div class="container">
@@ -13,7 +14,7 @@
                     <div class="nav-wrapper">
                         <form action="{{ url_for('search_bar') }}" method="POST">
                             <div class="input-field">
-                                <input id="search_bar" type="search" name="search_bar" required>
+                                <input id="search_bar" type="search" name="search_bar" class="white"required>
                                 <label class="label-icon" for="search_bar">Search</label>
                             </div>
                         </form>
