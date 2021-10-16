@@ -3,6 +3,7 @@
 {% block content %}
     <div class="row">
         <h3 class='center-align'>Add a Recpie</h3>
+        <hr class='underline blue-grey'>
     </div>
 
     <div class="row">
@@ -10,7 +11,7 @@
 
             <!-- Recepie Name -->
             <div class="row">
-                <div class="input-field col s10">
+                <div class="input-field col s12">
                     <input type="text" id='recepie_name' name='recepie_name' pattern='^[^\s][A-Za-z0-9\s]{1,100}$' class='validate' required>
                     <label for="recepie_name">Recipe Name</label>
                 </div>
@@ -18,7 +19,7 @@
 
             <!-- Category Name -->
             <div class="row">
-                <div class="input-field col s10">
+                <div class="input-field col s12">
                     <select id="category_name" name="category_name" class="validate" required>
                         <option value="" disabled selected>Choose category</option>
                         {% for category in categories %}
@@ -31,7 +32,7 @@
 
             <!-- Image URL -->
             <div class="row">
-                <div class="input-field col s10">
+                <div class="input-field col s12">
                     <input id="image_url" name="image_url" type="url" pattern="https?://.+"  class="validate" required>
                     <label for="image_url">Image url</label>
                     <span class="helper-text" data-error="enter valid URL" data-success="right"></span>
@@ -40,7 +41,7 @@
 
             <!-- Number of serves -->
             <div class="row">
-                <div class="input-field col s10">
+                <div class="input-field col s12">
                     <input id="serves" name="serves" type="text"  pattern="^[1-9][0-9]*$" class="validate" required>
                     <label for="serves">Number of serves</label>
                 </div>
@@ -48,7 +49,7 @@
 
             <!-- Prep time -->
             <div class="row">
-                <div class="input-field col s10">
+                <div class="input-field col s12">
                     <input id="prep_time" name="prep_time" type="text" pattern="^[1-9][0-9]*$" class="validate" required>
                     <label for="prep_time">Prepping time (in minutes)</label>
                 </div>
@@ -56,7 +57,7 @@
 
             <!-- Ingredients -->
             <div class="row">
-                <div class="input-field col s10">
+                <div class="input-field col s12">
                     <textarea id="ingredients" name="ingredients" class="materialize-textarea validate" required></textarea>
                     <label for="ingredients">Ingredients</label>
                     <span class="helper-text" data-error="wrong" data-success="right">Write every new ingredient on a new line.</span>
@@ -65,7 +66,7 @@
 
             <!-- Instructions -->
             <div class="row">
-                <div class="input-field col s10">
+                <div class="input-field col s12">
                     <textarea id="instructions" name="instructions" class="materialize-textarea validate" required></textarea>
                     <label for="instructions">Instructions</label>
                     <span class="helper-text" data-error="wrong" data-success="right">Write every new instruction on a new line.</span>
@@ -74,7 +75,7 @@
 
             <!-- Tips -->
             <div class="row">
-                <div class="input-field col s10">
+                <div class="input-field col s12">
                     <textarea id="tips" name="tips" class="materialize-textarea"></textarea>
                     <label for="tips">Tips</label>
                 </div>
@@ -85,7 +86,7 @@
             <!-- Add a cancel button -->
             <div class="row">
                 <div class="col s12">
-                    <button type="submit" class="col s4">Add a Recpie</button>
+                    <button type="submit" class="col s4 btn blue-grey darken-4">Add a Recpie</button>
                 </div>     
             </div>
         </form>
