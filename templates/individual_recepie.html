@@ -85,15 +85,23 @@
                         <li>
                             <p>
                                 <h6>
-                                    {{comment[0]}} at {{comment[1].date()}}
+                                    {{comment[0]}}, {{comment[1].date()}}
+                                    {% if session['user'] == recepie.created_by or session['user'] == 'admin' or session['user'] == comment[0]%}
+                                        <a href="">
+                                            <i class="fas fa-edit icon-color right"></i>
+                                        </a>
+                                            
+                                        <a href="{{ url_for('delete_comment', recepie_id=recepie._id, loop_index=loop.index)}}" class="right">
+                                            <i class="fas fa-trash-alt icon-color"></i>
+                                        </a>
+                                    {% endif %}
                                 </h6>
+                                
                                 <p>
                                     {{comment[2]}}
-                                    {% if session['user'] == recepie.created_by or session['user'] == 'admin' %}
-                                        <a href="{{ url_for('delete_comment', recepie_id=recepie._id, loop_index=loop.index)}}" class="right">Delete</a>
-                                    {% endif %}
+                                    
                                 </p>
-                                
+                                <br>
                                 
                             </p>
                             
