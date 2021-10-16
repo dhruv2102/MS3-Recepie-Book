@@ -7,21 +7,26 @@
     <div id='home-image'> 
     </div>
 
-<!-- Add quote -->
-
 <!-- Add multiple signs, one for recepies and one for sign ups -->
     <div class="row">
-        <div class="col s6 m4 offset-m2">
-            Recepies Here
-            Explore the recepies <a href="{{ url_for('get_recepies') }}">here</a>
+        <div class="col s6 center-align">
+            <h4>Welcome to Food Corner</h4>
+            <h6>This website is for the people who love to cook and enjoy inventing new recepies</h6>
+            <br>
+            <h6>
+                Explore the new recepies <a href="{{ url_for('get_recepies') }}">here</a>
+            </h6>
+            
         </div>
         <!-- Signup section -->
-        <div class="col s6 m4">
-            <div class="vertical-line">
-                Sign up Here
-                <button type="submit" class="col s12 btn-large light-blue darken-4 text-shadow">
-                    <a href="{{ url_for('sign_up') }}">Register Account</a>
-                </button>
+        <div class="col s6 m6">
+            <div class="vertical-line center align">
+                <h4>Are you new here?</h4>
+                <h6>
+                    Would you like to contribute to the growing community by adding more recipes?
+                </h6>
+                <br>
+                <h6>If so then sign up <a href="{{ url_for('sign_up') }}">here</a></h6>
             </div>
         </div>
     </div>
