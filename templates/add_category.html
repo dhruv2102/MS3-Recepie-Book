@@ -3,6 +3,8 @@
 {% block content %}
     <div class="row">
         <h3 class='center-align'>Add a Category</h3>
+        <hr class="blue-gray underline">
+
     </div>
 
     <div class="row">
@@ -10,18 +12,17 @@
 
             <!-- Recepie Name -->
             <div class="row">
-                <div class="input-field col s10">
+                <div class="input-field col s12">
                     <input type="text" id='category_name' name='category_name' pattern='^[A-Za-z0-9_]{1,50}$' class='validate' required>
                     <label for="category_name">Category Name</label>
                 </div>
             </div>
-
-            
             
             <!-- Add a cancel button -->
             <div class="row">
                 <div class="col s12">
-                    <button type="submit" class="col s4">Add a Recpie</button>
+                    <button type="submit" class="col s4 btn blue-grey darken-4">Add a Category</button>
+                    <a href="{{ url_for('categories') }}" class="btn blue-grey darken-4 col s4 right">Cancel</a>
                 </div>     
             </div>
         </form>
