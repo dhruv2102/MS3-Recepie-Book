@@ -4,7 +4,7 @@ from flask import (Flask, flash, render_template, redirect,
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from datetime import datetime
 
 if os.path.exists("env.py"):
     import env
@@ -109,6 +109,9 @@ def profile(username):
         existing_user = mongo.db.users.find_one({"username": username})
         users_name = existing_user["name"]
         recepies = list(mongo.db.recepies.find({"created_by": username}))
+        # Getting all recipes for admin
+        if session['user'] == "admin":
+            recepies = list(mongo.db.recepies.find())
         return render_template("profile.html", users_name=users_name, recepie_list=recepies)
     flash('Wrong profile, please log in again')
     session.pop('user')
@@ -248,7 +251,13 @@ def add_comment(recepie_id):
             "_id": ObjectId(recepie_id)
         })
         comments = recepie['comments']
-        comments.append(request.form.get('comment'))
+    
+        user_comment = request.form.get('comment')
+        currect_user = session['user']
+        timestamp = datetime.now()
+
+        _tuple = (currect_user, timestamp, user_comment)
+        comments.append(_tuple)
         recepie['comments'] = comments
         mongo.db.recepies.update({"_id": ObjectId(recepie_id)}, recepie)
     return redirect(url_for('get_individual_recepie', recepie_id=recepie_id))
