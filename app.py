@@ -263,9 +263,21 @@ def delete_category(category_id):
         return redirect(url_for('login'))
 
     if session['user'] == 'admin':
+        category = mongo.db.categories.find_one(
+            {"_id": ObjectId(category_id)}
+        )
+        category_name = category['category_name']
+
         mongo.db.categories.remove({"_id": ObjectId(category_id)})
         flash("Category successfully deleted")
 
+        recipes = list(mongo.db.recepies.find({
+            'category_name': category_name
+        }))
+
+        for item in recipes:
+            _id = item['_id']
+            mongo.db.recepies.remove({"_id": ObjectId(_id)})
     # Remove the recepies with the given category
         return redirect(url_for('categories'))
 
