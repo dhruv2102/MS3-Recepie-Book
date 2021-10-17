@@ -107,8 +107,8 @@
                     <p>
                         Subscribe to the newsletter to stay connected and receive updates regarding new recepies.
                     </p>
-                    <form action="" method="POST">
-                        <div class="input-field ">
+                    <form action="{{ url_for('subscribe') }}" method="POST">
+                        <div class="input-field">
                             <input id="email" name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="validate white-text">
                             <label for="email">Email</label>
                         </div>

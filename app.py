@@ -284,6 +284,19 @@ def edit_comment(recepie_id, loop_index):
     return render_template('edit_comment.html', comment=comment)
 
 
+@app.route('/subscribe', methods=['GET', 'POST'])
+def subscribe():
+    print('method =============================')
+    if request.method == 'POST':
+        user_email = request.form.get('email')
+        email_doc = {
+            "email": user_email,
+        }
+        mongo.db.subscribed_user.insert_one(email_doc)
+        flash('You are subscribed')
+    return redirect(url_for('home'))
+
+
 if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP"), port=int(os.environ.get("PORT")), debug=True
