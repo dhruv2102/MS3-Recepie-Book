@@ -17,16 +17,18 @@
         <nav>
             <!-- Desktop Navigation -->
             <div class="nav-wrapper blue-grey darken-4 whilte-text">
-                <a href="#" class="brand-logo">Logo</a>
+                <a href="{{ url_for('home') }}" class="brand-logo white-text">
+                    Food Corner
+                </a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('home') }}">Home</a></li>
-                    <li><a href="{{ url_for('get_recepies') }}">Recepies</a></li>
+                    <li><a href="{{ url_for('get_recepies') }}">Recipes</a></li>
                     <!-- Add session user stuff here -->
                     {% if session.user %}
                         <!-- Add user profile -->
                         <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                        <li><a href="{{ url_for('add_recepie') }}">Add a Recepie</a></li>
+                        <li><a href="{{ url_for('add_recepie') }}">Add a Recipe</a></li>
 
                         {% if session.user|lower == "admin" %}
                             <!-- Add Categories -->
@@ -45,12 +47,12 @@
         <!-- Mobile Navigation -->
         <ul class="sidenav blue-grey darken-2 white-text" id="mobile-demo">
             <li><a href="{{ url_for('home') }}">Home</a></li>
-            <li><a href="{{ url_for('get_recepies') }}">Recepies</a></li>
+            <li><a href="{{ url_for('get_recepies') }}">Recipes</a></li>
             <!-- Add session user stuff here -->
             {% if session.user %}
             <!-- Add user profile -->
                 <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                <li><a href="{{ url_for('add_recepie') }}">Add a Recepie</a></li>
+                <li><a href="{{ url_for('add_recepie') }}">Add a Recipe</a></li>
 
                 {% if session.user|lower == "admin" %}
                     <!-- Add Categories -->

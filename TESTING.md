@@ -1,11 +1,11 @@
 # <center>TESTING</center>
 
 ## Index
-- Code Validators
-- Resposiveness
-- Browser Compatibility
-- Testing User Stories
-- Bugs
+- [Code Validators](#code-validators)
+- [Resposiveness](#responsiveness)
+- [Browser Compatibility](#browser-compatibility)
+- [Testing User Stories](#testing-user-stories)
+- [Bugs](#bugs)
 
 ## Code Validators
 1. HTML Validator
@@ -14,3 +14,9 @@
 4. Javscript Validator
 
 ## Responsiveness
+
+## Browser Compatibility
+
+## Testing User Stories
+
+## Bugs
