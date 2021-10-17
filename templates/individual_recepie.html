@@ -87,7 +87,7 @@
                                 <h6>
                                     {{comment[0]}}, {{comment[1].date()}}
                                     {% if session['user'] == recepie.created_by or session['user'] == 'admin' or session['user'] == comment[0]%}
-                                        <a href="">
+                                        <a href="{{ url_for('edit_comment', recepie_id=recepie._id, loop_index=loop.index)}}">
                                             <i class="fas fa-edit icon-color right"></i>
                                         </a>
                                             

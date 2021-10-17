@@ -261,7 +261,28 @@ def add_comment(recepie_id):
         recepie['comments'] = comments
         mongo.db.recepies.update({"_id": ObjectId(recepie_id)}, recepie)
     return redirect(url_for('get_individual_recepie', recepie_id=recepie_id))
-    
+
+
+@app.route('/edit_comment/<recepie_id>/<loop_index>', methods=["GET", "POST"])
+def edit_comment(recepie_id, loop_index):
+    recepie = mongo.db.recepies.find_one(
+        {"_id": ObjectId(recepie_id)}
+    )
+    comment_list = recepie['comments']
+    comment = comment_list[int(loop_index)-1]
+    if request.method == "POST":
+        updated_comment = request.form.get('comment')
+        comment[1] = datetime.now()
+        comment[2] = updated_comment
+        comment_list[int(loop_index)-1] = comment
+        recepie['comments'] = comment_list
+        mongo.db.recepies.update({"_id": ObjectId(recepie_id)}, recepie)
+        return redirect(
+            url_for("get_individual_recepie", recepie_id=recepie_id)
+            )
+
+    return render_template('edit_comment.html', comment=comment)
+
 
 if __name__ == "__main__":
     app.run(
