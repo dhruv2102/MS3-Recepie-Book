@@ -20,12 +20,12 @@
      ![pep8](/static/images/testing/pep8/python.png)
 
 ## Responsiveness
-The resposiveness of the website is checked via Chrome developer tools and R
-    - The site is reposive across all screens. 
+The resposiveness of the website is checked via Chrome developer tools and Resposive Design Checker
+- The site is reposive across all screens. 
     - Devices used to test are
         - Desktop: 1024px, 1366px, 1440px, 1600px and 1680px
         - Mobile and Tablet:  Galaxy S5, iPhone 5/SE, iPhone 6/7/8, iPhone 6/7/8 plus, iPhone x, iPad and iPad Pro
-    - All the links work as they are expected
+- All the links work as they are expected
 
 ## Browser Compatibility
 The website works on google chrome, safari, mozilla firefox and edge
@@ -59,14 +59,24 @@ The website works on google chrome, safari, mozilla firefox and edge
     7. I can edit my comments on other recipes
         - Site member can edit their comments on certain recipes
     8. I can delete my comments on other recipes
-        - 
+        - Site members which have commented can delete their comments
     9. I can delete any comments on my recipes 
+        - Recipe owner can delete comments
 <br>
 - Admin Goals
     1. I can add new categories for recipes
+        - Admin can add new categories
     2. I can edit categories
+        - Admin can edit any category
     3. I can delete, non-relevant categories
+        - Admin can delete non relevant category
     4. I can delete any recipes
+        - Admin can delete any recipes
     5. I can edit any recipes
+        - Admin can edit any recipes
     6. I can edit or delete any comments
+        - Admin can edit and delete comments
+    
 ## Bugs
+- `requests` library not imported into requirements.txt
+    - For adding `requests`, I ran a `pip3 freeze --local > requirements.txt` command to generate the updated `requirements.txt` file, but in it requests library was not imported. This caused the Heroku app to fail. I then logged into Heroku logs by running the command `heroku logs --tail` to generate the logsand identified the issue from there. I checked the requirements file and found since requests library was present in my local system, it was not showing up when I ran `pip freeze`, I looked up the version for requests library in my system and added it to requirements.txt manually.
