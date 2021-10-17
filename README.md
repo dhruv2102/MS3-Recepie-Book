@@ -22,6 +22,7 @@ Food corner is the place for people who want to explore new recipes.
 <li> Technologies Used
 <li> Testing
 <li> Deployment
+<li> Acknowledgement
 <li> Credits
 </ol>
 
@@ -254,6 +255,10 @@ Add the env file to the .gitignore as you wouldn't want your database credential
 Assuming you have cloned the project and added the environemnt file, in the command line run the command `python app.py`. This will run the app locally. 
 
 
-## Credits
+## Acknowledgement
+---
+I would look to thank my mentor for his guidance and support. I would also like to thank code institute for their tutorials
 
-I would look to thank my mentor for his guidance and support. I would also like to thank 
+## Credits
+---
+All the recipes here are taken from https://www.avantgardevegan.com/ and images are taken from https://www.freepik.com/
