@@ -50,7 +50,7 @@ def sign_up():
         flash("You are sucessfully signed up!!!")
 
         # Redirect to Profile Page------------------------------------------
-        # Need to do
+        return redirect(url_for('profile', username=session['user']))
     return render_template("sign_up.html")
 
 
