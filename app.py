@@ -49,7 +49,7 @@ def sign_up():
         session["user"] = request.form.get("username").lower()
         flash("You are sucessfully signed up!!!")
 
-        # Redirect to Profile Page------------------------------------------
+        # Redirect to Profile Page
         return redirect(url_for('profile', username=session['user']))
     return render_template("sign_up.html")
 
@@ -70,7 +70,7 @@ def login():
             if check_password_hash(user_password, entered_password):
                 session["user"] = existing_user["username"]
                 flash("Welcome {}".format(users_name))
-                # Redirect to profile
+
                 return redirect(url_for("profile", username=username))
             else:
                 flash("Your username/password was wrong")
@@ -120,6 +120,10 @@ def profile(username):
 
 @app.route("/add_recepie", methods=['GET', 'POST'])
 def add_recepie():
+    if session.get('user') is None:
+        flash('Please Sign In')
+        return redirect(url_for('login'))
+
     if request.method == 'POST':
         recepie = {
             "recepie_name": request.form.get("recepie_name"),
@@ -143,6 +147,10 @@ def add_recepie():
 
 @app.route("/edit_recepie/<recepie_id>", methods=['GET', 'POST'])
 def edit_recepie(recepie_id):
+    if session.get('user') is None:
+        flash('Please Sign In')
+        return redirect(url_for('login'))
+
     if request.method == 'POST':
         edited_recepie = {
             "recepie_name": request.form.get("recepie_name"),
@@ -166,6 +174,10 @@ def edit_recepie(recepie_id):
 
 @app.route("/delete_recepie/<recepie_id>")
 def delete_recepie(recepie_id):
+    if session.get('user') is None:
+        flash('Please Sign In')
+        return redirect(url_for('login'))
+
     mongo.db.recepies.remove({"_id": ObjectId(recepie_id)})
     flash("Recipe successfully deleted")
     return redirect(url_for('profile', username=session['user']))
@@ -173,42 +185,74 @@ def delete_recepie(recepie_id):
 
 @app.route("/categories")
 def categories():
-    all_categories = mongo.db.categories.find()
-    return render_template('categories.html', categories=all_categories)
+    if session.get('user') is None:
+        flash('Please Sign In')
+        return redirect(url_for('login'))
+    
+    if session['user'] == 'admin':
+        all_categories = mongo.db.categories.find()
+        return render_template('categories.html', categories=all_categories)
+    
+    session.pop('user')
+    return redirect(url_for('login'))
 
 
 @app.route("/add_category", methods=["GET", "POST"])
 def add_category():
-    if request.method == 'POST':
-        new_category = {
-            "category_name": request.form.get("category_name"),
-        }
-        mongo.db.categories.insert_one(new_category)
-        flash("Category added")
-        return redirect(url_for('categories'))
-    return render_template('add_category.html')
+    if session.get('user') is None:
+        flash('Please Sign In')
+        return redirect(url_for('login'))
+    
+    if session['user'] == 'admin':
+        if request.method == 'POST':
+            new_category = {
+                "category_name": request.form.get("category_name"),
+            }
+            mongo.db.categories.insert_one(new_category)
+            flash("Category added")
+            return redirect(url_for('categories'))
+        return render_template('add_category.html')
+    
+    session.pop('user')
+    return redirect(url_for('login'))
 
 
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
-    if request.method == 'POST':
-        edited_category = {
-            "category_name": request.form.get("category_name"),
-        }
-        mongo.db.categories.update({"_id": ObjectId(category_id)}, edited_category)
-        flash("Category updated")
-        return redirect(url_for('categories'))
-    category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
-    return render_template('edit_category.html', category=category)
+    if session.get('user') is None:
+        flash('Please Sign In')
+        return redirect(url_for('login'))
+    
+    if session['user'] == 'admin':
+        if request.method == 'POST':
+            edited_category = {
+                "category_name": request.form.get("category_name"),
+            }
+            mongo.db.categories.update({"_id": ObjectId(category_id)}, edited_category)
+            flash("Category updated")
+            return redirect(url_for('categories'))
+        category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+        return render_template('edit_category.html', category=category)
+    
+    session.pop('user')
+    return redirect(url_for('login'))
 
 
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):
-    mongo.db.categories.remove({"_id": ObjectId(category_id)})
-    flash("Category successfully deleted")
+    if session.get('user') is None:
+        flash('Please Sign In')
+        return redirect(url_for('login'))
+    
+    if session['user'] == 'admin':
+        mongo.db.categories.remove({"_id": ObjectId(category_id)})
+        flash("Category successfully deleted")
 
     # Remove the recepies with the given category
-    return redirect(url_for('categories'))
+        return redirect(url_for('categories'))
+    
+    session.pop('user')
+    return redirect(url_for('login'))
 
 
 # https://docs.mongodb.com/manual/text-search/ - Searching for text
@@ -228,6 +272,10 @@ def search_bar():
 
     for i in cursor:
         recepies.append(i)
+
+    if recepies == []:
+        flash('No recipes found')
+        return redirect('get_recepies')
 
     return render_template("recepies.html", recepies=recepies)
 
