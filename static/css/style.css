@@ -79,3 +79,9 @@ main {
 .icon-color{
   color: #263238
 }
+
+@media screen and (max-width: 650px){
+  h4 {
+    font-size: 20px;
+  }
+}

@@ -286,7 +286,6 @@ def edit_comment(recepie_id, loop_index):
 
 @app.route('/subscribe', methods=['GET', 'POST'])
 def subscribe():
-    print('method =============================')
     if request.method == 'POST':
         user_email = request.form.get('email')
         email_doc = {
