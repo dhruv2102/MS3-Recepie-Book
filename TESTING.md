@@ -5,6 +5,7 @@
 - [Resposiveness](#responsiveness)
 - [Browser Compatibility](#browser-compatibility)
 - [Testing User Stories](#testing-user-stories)
+- [Design Logics](#design-logics)
 - [Bugs](#bugs)
 
 ## Code Validators
@@ -76,7 +77,21 @@ The website works on google chrome, safari, mozilla firefox and edge
         - Admin can edit any recipes
     6. I can edit or delete any comments
         - Admin can edit and delete comments
-    
+
+## Design Logics 
+To protect the website from possible hackers, some defense mechanisms were put into place. 
+
+To do this, almost every route in `app.py` has some kind of backend validation. The structure of backend validation is
+- If `there is no session user` then log out
+- If `session user exists` then the user can only acccess the end points accesible to the user and not able to access any other profile. 
+- Same logic was applied for add/deleteing recipes as well for admin login
+
+
 ## Bugs
 - `requests` library not imported into requirements.txt
     - For adding `requests`, I ran a `pip3 freeze --local > requirements.txt` command to generate the updated `requirements.txt` file, but in it requests library was not imported. This caused the Heroku app to fail. I then logged into Heroku logs by running the command `heroku logs --tail` to generate the logsand identified the issue from there. I checked the requirements file and found since requests library was present in my local system, it was not showing up when I ran `pip freeze`, I looked up the version for requests library in my system and added it to requirements.txt manually.
+
+- I could access other profiles even when session user was not in place by hitting the endpoint. 
+    - To resolve this I added backend validation to almost every routing method
+
+- When we delete a category and add a category of the same name, the recipes aren't connected to the same category. To mitigate this, if a category is deleted, then all the recipes attached to the category would be deleted. 
