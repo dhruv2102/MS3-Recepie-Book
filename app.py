@@ -1,4 +1,5 @@
 import os
+import requests
 from flask import (Flask, flash, render_template, redirect, 
                     request, session, url_for)
 from flask_pymongo import PyMongo
@@ -125,11 +126,17 @@ def add_recepie():
         return redirect(url_for('login'))
 
     if request.method == 'POST':
+        image_url = request.form.get("image_url")
+        if is_url_image(image_url):
+            final_url = image_url
+        else:
+            final_url = 'https://image.freepik.com/free-photo/wooden-background-with-basket-full-vegetables_23-2147609629.jpg'
+
         recepie = {
             "recepie_name": request.form.get("recepie_name"),
             "category_name": request.form.get("recepie_name"),
             "ingredients": request.form.get("ingredients"),
-            "image_url": request.form.get("image_url"),
+            "image_url": final_url,
             "Servings": request.form.get("serves"),
             "prep_time": request.form.get("prep_time"),
             "steps": request.form.get("instructions"),
@@ -342,6 +349,14 @@ def subscribe():
         mongo.db.subscribed_user.insert_one(email_doc)
         flash('You are subscribed')
     return redirect(url_for('home'))
+
+
+def is_url_image(image_url):
+    image_formats = ("image/png", "image/jpeg", "image/jpg")
+    r = requests.head(image_url)
+    if r.headers["content-type"] in image_formats:
+       return True
+    return False
 
 
 if __name__ == "__main__":
