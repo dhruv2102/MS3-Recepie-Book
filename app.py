@@ -1,7 +1,8 @@
 import os
 import requests
-from flask import (Flask, flash, render_template, redirect, 
-                    request, session, url_for)
+from flask import (
+    Flask, flash, render_template, redirect,
+    request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -9,7 +10,6 @@ from datetime import datetime
 
 if os.path.exists("env.py"):
     import env
-
 
 # ----------------------- Connectiong to Flask
 app = Flask(__name__)
@@ -105,7 +105,8 @@ def logout():
 
 @app.route("/profile/<username>")
 def profile(username):
-    # If session user is not same as logged in user then log then empty the session user string
+    # If session user is not same as logged in user then
+    # log then empty the session user string
     if session['user'] == username:
         existing_user = mongo.db.users.find_one({"username": username})
         users_name = existing_user["name"]
@@ -113,7 +114,8 @@ def profile(username):
         # Getting all recipes for admin
         if session['user'] == "admin":
             recepies = list(mongo.db.recepies.find())
-        return render_template("profile.html", users_name=users_name, recepie_list=recepies)
+        return render_template(
+            "profile.html", users_name=users_name, recepie_list=recepies)
     flash('Wrong profile, please log in again')
     session.pop('user')
     return redirect(url_for("login"))
@@ -130,7 +132,8 @@ def add_recepie():
         if is_url_image(image_url):
             final_url = image_url
         else:
-            final_url = 'https://image.freepik.com/free-photo/wooden-background-with-basket-full-vegetables_23-2147609629.jpg'
+            final_url = 'https://image.freepik.com/free-photo/wooden-'+
+            'background-with-basket-full-vegetables_23-2147609629.jpg'
 
         recepie = {
             "recepie_name": request.form.get("recepie_name"),
@@ -178,7 +181,8 @@ def edit_recepie(recepie_id):
 
     recepie = mongo.db.recepies.find_one({"_id": ObjectId(recepie_id)})
     categories = list(mongo.db.categories.find())
-    return render_template('edit_recepie.html', categories=categories, recepie=recepie)
+    return render_template(
+        'edit_recepie.html', categories=categories, recepie=recepie)
 
 
 @app.route("/delete_recepie/<recepie_id>")
@@ -197,11 +201,11 @@ def categories():
     if session.get('user') is None:
         flash('Please Sign In')
         return redirect(url_for('login'))
-    
+
     if session['user'] == 'admin':
         all_categories = mongo.db.categories.find()
         return render_template('categories.html', categories=all_categories)
-    
+
     session.pop('user')
     return redirect(url_for('login'))
 
@@ -211,7 +215,7 @@ def add_category():
     if session.get('user') is None:
         flash('Please Sign In')
         return redirect(url_for('login'))
-    
+
     if session['user'] == 'admin':
         if request.method == 'POST':
             new_category = {
@@ -221,7 +225,7 @@ def add_category():
             flash("Category added")
             return redirect(url_for('categories'))
         return render_template('add_category.html')
-    
+
     session.pop('user')
     return redirect(url_for('login'))
 
@@ -231,18 +235,20 @@ def edit_category(category_id):
     if session.get('user') is None:
         flash('Please Sign In')
         return redirect(url_for('login'))
-    
+
     if session['user'] == 'admin':
         if request.method == 'POST':
             edited_category = {
                 "category_name": request.form.get("category_name"),
             }
-            mongo.db.categories.update({"_id": ObjectId(category_id)}, edited_category)
+            mongo.db.categories.update(
+                {"_id": ObjectId(category_id)}, edited_category
+            )
             flash("Category updated")
             return redirect(url_for('categories'))
         category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
         return render_template('edit_category.html', category=category)
-    
+
     session.pop('user')
     return redirect(url_for('login'))
 
@@ -252,14 +258,14 @@ def delete_category(category_id):
     if session.get('user') is None:
         flash('Please Sign In')
         return redirect(url_for('login'))
-    
+
     if session['user'] == 'admin':
         mongo.db.categories.remove({"_id": ObjectId(category_id)})
         flash("Category successfully deleted")
 
     # Remove the recepies with the given category
         return redirect(url_for('categories'))
-    
+
     session.pop('user')
     return redirect(url_for('login'))
 
@@ -308,7 +314,7 @@ def add_comment(recepie_id):
             "_id": ObjectId(recepie_id)
         })
         comments = recepie['comments']
-    
+
         user_comment = request.form.get('comment')
         currect_user = session['user']
         timestamp = datetime.now()
