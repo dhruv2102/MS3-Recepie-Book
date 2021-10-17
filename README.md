@@ -11,19 +11,19 @@ Food corner is the place for people who want to explore new recipes.
 ## Index
 ---
 <ol> 
-<li> [User Experience (UX)](#user-experience)
+<li> <a href="#user-experience">User Experience (UX)</a>
     <ul>
-        <li> [Project Goals](#project-goals)
-        <li> User Stories
-        <li> Database Architecture
-        <li> Wireframes
+        <li> <a href="#project-goals">Project Goals</a>
+        <li> <a href="#user-stories">User Stories</a>
+        <li><a href="#database-architecture">Database Architecture</a> 
+        <li><a href="#wireframes">Wireframes</a>
     </ul>
-<li> Features
-<li> Technologies Used
-<li> Testing
-<li> Deployment
-<li> [Acknowledgement](#acknowledgement)
-<li> Credits
+<li> <a href="#features">Features</a>
+<li> <a href="#technologies-used">Technologies Used</a>
+<li> <a href="#testing">Testing</a>
+<li> <a href="#deployment">Deployment</a>
+<li> <a href="#acknowledgement">Acknowledgement</a>
+<li> <a href="#credits"> Credits</a>
 </ol>
 
 
