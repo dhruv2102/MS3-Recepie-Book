@@ -134,7 +134,7 @@ def add_recepie():
 
         recepie = {
             "recepie_name": request.form.get("recepie_name"),
-            "category_name": request.form.get("recepie_name"),
+            "category_name": request.form.get("category_name"),
             "ingredients": request.form.get("ingredients"),
             "image_url": final_url,
             "Servings": request.form.get("serves"),
@@ -161,7 +161,7 @@ def edit_recepie(recepie_id):
     if request.method == 'POST':
         edited_recepie = {
             "recepie_name": request.form.get("recepie_name"),
-            "category_name": request.form.get("recepie_name"),
+            "category_name": request.form.get("category_name"),
             "ingredients": request.form.get("ingredients"),
             "image_url": request.form.get("image_url"),
             "Servings": request.form.get("serves"),
@@ -351,11 +351,12 @@ def subscribe():
     return redirect(url_for('home'))
 
 
+# https://stackoverflow.com/questions/10543940/check-if-a-url-to-an-image-is-up-and-exists-in-python
 def is_url_image(image_url):
     image_formats = ("image/png", "image/jpeg", "image/jpg")
     r = requests.head(image_url)
     if r.headers["content-type"] in image_formats:
-       return True
+        return True
     return False
 
 
