@@ -159,6 +159,7 @@ def edit_recepie(recepie_id):
         return redirect(url_for('login'))
 
     if request.method == 'POST':
+        recepie = mongo.db.recepies.find_one({"_id": ObjectId(recepie_id)})
         edited_recepie = {
             "recepie_name": request.form.get("recepie_name"),
             "category_name": request.form.get("category_name"),
@@ -169,6 +170,7 @@ def edit_recepie(recepie_id):
             "steps": request.form.get("instructions"),
             "Tips": request.form.get("tips"),
             "created_by": session['user'],
+            "comments": recepie['comments'],
         }
         mongo.db.recepies.update({"_id": ObjectId(recepie_id)}, edited_recepie)
         flash("Recipe added")
