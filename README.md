@@ -39,7 +39,8 @@ Food corner is the place for people who want to explore new recipes.
     3. See an overview of recipes
     4. Search specific recipes
     5. Register an account
-<br>
+
+
 - Site Member Goals
     1. I want to share my recipes
     2. I want to edit my recipes
@@ -50,7 +51,8 @@ Food corner is the place for people who want to explore new recipes.
     7. I can edit my comments on other recipes
     8. I can delete my comments on other recipes
     9. I can delete any comments on my recipes 
-<br>
+
+
 - Admin Goals
     1. I can add new categories for recipes
     2. I can edit categories
@@ -96,7 +98,7 @@ The wireframes are as follows
 
 - Features to be added  
     1. Users can unsubscribe from subscribe list    
-    2. Users can vary the serving size and the website can dynamically ad   apt    to it
+    2. Users can vary the serving size and the website can dynamically adapt to it
     3. Metrics for admin to see what recipes are more popular
     4. Possibly upload the image or add multiple images into carousel
     5. Users can delete their profile
