@@ -37,9 +37,8 @@ Food corner is the place for people who want to explore new recipes.
     1. User can visit the website in any device
     2. Navigate through the website easily
     3. See an overview of recipes
-    4. Search recipes by category
-    5. Search specific recipes
-    6. Register an account
+    4. Search specific recipes
+    5. Register an account
 <br>
 - Site Member Goals
     1. I want to share my recipes
