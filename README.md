@@ -153,3 +153,78 @@ The project uses the following schema
     
     - [PEP8](http://pep8online.com/)
         - This was used to validate python code
+
+## Testing
+---
+================= Add link to Testing.md
+
+## Deployment
+To deploy the project you need the following
+- Github account
+- Mongodb account
+- Heroku account
+
+### Clone the project
+1. Log into github and go to repo https://github.com/dhruv2102/MS3-Recepie-Book
+2. Click on code from the dropdown
+3. Copy the IRL for the rep
+4. OPen cmd prompt on you local computer and go to the repo you want to clone the project in
+5. Paste the url with the glit clone command 
+`git clone https://github.com/dhruv2102/MS3-Recepie-Book`
+
+PS In order to run the file you will need to create and env.py using your own variables and by creating an account in mongo db and create matching database as documented in [database section](#database-architecture)
+
+
+## Heroku Deployment
+
+### Requirements and Procfile
+In order to deploy to heroku we need to provide it with a list of requirements. You need to follow these steps befor eyou can deploy to heorku
+- In the terminal of your IDE, type `pip3 freeze --local > requirements.txt` to create the requirements file
+- After this run the command `echo web: python run.py > Procfile` to create the Procfile
+- The procfile needs contain the line `web: python app.py` and make sure there is no empty line after that
+- Push these files into rep
+
+### Environment File
+
+Create and env.py file with the following information
+
+```
+import os
+
+os.environ.setdefault("IP", "0.0.0.0")
+os.environ.setdefault("PORT", "5000")
+os.environ.setdefault("SECRET_KEY", " *unique secret key* ")
+os.environ.setdefault("MONGO_URI", " *unique uri from mongo.db * ")
+os.environ.setdefault("MONGO_DB", " *database name* ")
+```
+
+Add the env file to the .gitignore as you wouldn't want your database credentials in the hand of other people
+
+### Creating the heroku app
+- Log into heroku
+- Select create new app from dashboard
+- Choose the app name
+- Select the region closest to you
+- Click `Create app`
+
+### Connecting to github
+- From dashboard, click on the `Deploy` tab
+- Locate `Deployment Method` and select Github
+- In the search bar, locate your repository by name. After finding your repo click on `Connect`
+- Do not click automatic deployment at the moment as without proper configurations in place deployment can give some unexpected errors
+- Click on the settings tab and cick on `Reveal config vars`
+- Use the following variables which are pretty similar to your environment variables
+
+| Key           | Value               |
+| ------------- |:--------------------|
+| IP            | 0.0.0.0             |
+| PORT          | 5000                |
+| SECRET_KEY    |*Secure secret key*  |
+| MONGO_URI     |mongodb+srv://*USER*:*PASSWORD*@myfirstcluster.dr4g1.mongodb.net/cocktail_hour?retryWrites=true&w=majority |
+| MONGO_DBNAME  | my_receipes       |
+|               |                     |
+
+- Go back to the `Deploy` tab and you can now enable automatic deployment
+- Locate `Manual Deploy` option and choose the master branch and click `Deploy Branch`
+- Once the app is built, click `Open App` from the page. 
+
