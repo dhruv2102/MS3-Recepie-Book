@@ -22,7 +22,6 @@ Food corner is the place for people who want to explore new recipes.
 <li> Technologies Used
 <li> Testing
 <li> Deployment
-<li> Running project locally
 <li> Credits
 </ol>
 
@@ -175,16 +174,16 @@ To deploy the project you need the following
 PS In order to run the file you will need to create and env.py using your own variables and by creating an account in mongo db and create matching database as documented in [database section](#database-architecture)
 
 
-## Heroku Deployment
+### Heroku Deployment
 
-### Requirements and Procfile
+#### Requirements and Procfile
 In order to deploy to heroku we need to provide it with a list of requirements. You need to follow these steps befor eyou can deploy to heorku
 - In the terminal of your IDE, type `pip3 freeze --local > requirements.txt` to create the requirements file
 - After this run the command `echo web: python run.py > Procfile` to create the Procfile
 - The procfile needs contain the line `web: python app.py` and make sure there is no empty line after that
 - Push these files into rep
 
-### Environment File
+#### Environment File
 
 Create and env.py file with the following information
 
@@ -200,14 +199,14 @@ os.environ.setdefault("MONGO_DB", " *database name* ")
 
 Add the env file to the .gitignore as you wouldn't want your database credentials in the hand of other people
 
-### Creating the heroku app
+#### Creating the heroku app
 - Log into heroku
 - Select create new app from dashboard
 - Choose the app name
 - Select the region closest to you
 - Click `Create app`
 
-### Connecting to github
+#### Connecting to github
 - From dashboard, click on the `Deploy` tab
 - Locate `Deployment Method` and select Github
 - In the search bar, locate your repository by name. After finding your repo click on `Connect`
@@ -228,3 +227,5 @@ Add the env file to the .gitignore as you wouldn't want your database credential
 - Locate `Manual Deploy` option and choose the master branch and click `Deploy Branch`
 - Once the app is built, click `Open App` from the page. 
 
+### Running Project Locally
+Assuming you have cloned the project and added the environemnt file, in the command line run the command `python app.py`. This will run the app locally. 
