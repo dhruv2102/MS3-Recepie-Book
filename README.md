@@ -1,6 +1,6 @@
 # <center>Food Corner</center>
 
-==================== ADD IMAGE HERE
+![Am I resposive](/static/images/readme/amiresponsive.png)
 
 Food corner is the place for people who want to explore new recipes. 
 
@@ -154,9 +154,10 @@ The project uses the following schema
 
 ## Testing
 ---
-================= Add link to Testing.md
+The testing document can be found [here](TESTING.md)
 
 ## Deployment
+---
 To deploy the project you need the following
 - Github account
 - Mongodb account
@@ -228,3 +229,8 @@ Add the env file to the .gitignore as you wouldn't want your database credential
 
 ### Running Project Locally
 Assuming you have cloned the project and added the environemnt file, in the command line run the command `python app.py`. This will run the app locally. 
+
+
+## Credits
+
+I would look to thank my mentor for his guidance and support. I would also like to thank 
