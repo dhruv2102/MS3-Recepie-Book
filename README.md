@@ -64,7 +64,28 @@ The project uses the following schema
 ![Datbase schema](/static/images/readme/database.png)
 
 ### Wireframes
-================= Add wireframeeessss
+The wireframes are as follows
+- Home Page
+    ![Home Page](/static/images/wireframes/home.JPG)
+
+- Recipe Page
+    ![Recipe Page](/static/images/wireframes/recipes.JPG)
+
+- Login/Signup Page
+    ![Login/Signup Page](/static/images/wireframes/login_signup.JPG)
+
+- Profile Page
+    ![Profile Page](/static/images/wireframes/profile.JPG)
+
+- Single Recipe Page
+    ![Signle Recipe Page](/static/images/wireframes/individual_recipe.JPG)
+
+- Add/Edit Recipe
+    ![Add/Edit Recipe Page](/static/images/wireframes/add_edit_recipes.JPG)
+
+- Add/Edit Categories
+    ![Add/Edit Categories Page](/static/images/wireframes/add_edit_category.JPG)
+
 
 ## Features
 - Existing Features
