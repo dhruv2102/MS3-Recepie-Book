@@ -132,8 +132,10 @@ def add_recepie():
         if is_url_image(image_url):
             final_url = image_url
         else:
-            final_url = 'https://image.freepik.com/free-photo/wooden-'+
-            'background-with-basket-full-vegetables_23-2147609629.jpg'
+            final_url = (
+                'https://image.freepik.com/free-photo/wooden-',
+                'background-with-basket-full-vegetables_23-2147609629.jpg'
+            )
 
         recepie = {
             "recepie_name": request.form.get("recepie_name"),
